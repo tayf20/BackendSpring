@@ -10,5 +10,6 @@ import com.example.demo.entity.User;
 @Repository
 public interface DonateRepository extends JpaRepository<Donate, Integer>{
 	//Donate findByIdchild(int idchild);
-	public Donate findByiddonate(Integer id);
+		public Donate findByiddonate(Integer id);
+		public Donate findByDonatoremail(String s);
 }

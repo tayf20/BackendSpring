@@ -6,6 +6,7 @@ import com.example.demo.entity.Donate;
 
 public interface DonateService {
 
-	public DonateDto saveDonate(DonateDto dto);
+	public void saveDonate(DonateDto dto);
     public Donate getDonateById(int id);
+    public Donate getByEmail(String email);
 }

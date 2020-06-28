@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +25,13 @@ public class DonateServiceImpl implements DonateService {
 	ChildService childService;
 	
 	@Override
-	public DonateDto saveDonate(DonateDto dto) {
-		Integer[] childrenIds = dto.getIdchildren();
-		List<Child> children = new ArrayList<>();
-		for (int childId : childrenIds) {
-			children.add(childService.getChildById(childId));
+	public void saveDonate(DonateDto dto) {
+
+		if(dto != null) {
+			Donate d = AppModelMapper.mapDonate(dto);
+			Donate donate = donateRepoo.save(d);
 		}
-		Donate d = AppModelMapper.mapDonate(dto);
-		d.setChildren(children);
-		Donate donate = donateRepoo.save(d);
-		
-		return AppModelMapper.mapDonateDto(donate);
-		 
+ 
 	}
 
 	
@@ -48,6 +45,11 @@ public class DonateServiceImpl implements DonateService {
 		return donateRepoo.findByiddonate(id);
 		
 		
+	}
+
+	@Override
+	public Donate getByEmail(String email) {
+		return this.donateRepoo.findByDonatoremail(email);
 	}
 
 }

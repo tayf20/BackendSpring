@@ -1,15 +1,21 @@
 package com.example.demo.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.example.demo.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 @Entity
 @Table(name ="User ")
 public class User  implements Serializable {
@@ -40,6 +46,11 @@ public class User  implements Serializable {
 	//private List<Enfant> enfant = new ArrayList<>();
 	
 
+	@OneToMany(mappedBy = "donate")
+	@JsonIgnore
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	private List<Childdonator> childdonators;
 
 	public Role getRole() {
 		return role;
@@ -81,7 +92,13 @@ public class User  implements Serializable {
 		this.email = email;
 	}
 	
-	
+	public List<Childdonator> getChilddonators() {
+		return childdonators;
+	}
+
+	public void setChilddonators(List<Childdonator> childdonators) {
+		this.childdonators = childdonators;
+	}
 	
 	@Override
 	public String toString() {

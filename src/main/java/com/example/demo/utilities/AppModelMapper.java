@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.demo.dtos.ChildDto;
+import com.example.demo.dtos.ChilddonatorDto;
 import com.example.demo.dtos.DonateDto;
 import com.example.demo.dtos.PaymentDto;
 import com.example.demo.dtos.PaymentResponseDto;
 import com.example.demo.entity.Child;
+import com.example.demo.entity.Childdonator;
 import com.example.demo.entity.Donate;
 import com.example.demo.entity.Payment;
 
@@ -26,7 +28,7 @@ public class AppModelMapper {
 			return null;
 		}
 		PaymentDto dto = new PaymentDto();
-		dto.setIddonate(payment.getDonate().getIddonate());
+	   dto.setIddonate(payment.getDonate().getIddonate());
 		dto.setCreditcard(payment.getCreditcard());
 		return dto;
 	}
@@ -39,7 +41,6 @@ public class AppModelMapper {
 		Donate d = new Donate();
 		d.setDonatoremail(dto.getDonatoremail());
 		d.setDonatorname(dto.getDonatorname());
-		d.setTotal(dto.getTotal());
 		return d;
 	}
 	
@@ -48,17 +49,17 @@ public class AppModelMapper {
 		if(donate == null) {
 			return null;
 		}
-		DonateDto dto = new DonateDto();
+		DonateDto dto = new DonateDto();		
 		dto.setDonatoremail(donate.getDonatoremail());
 		dto.setDonatorname(donate.getDonatorname());
-		dto.setTotal(donate.getTotal());
-		List<Child> children =  donate.getChildren();
-		List<Integer> idChildren = new ArrayList<>();
-		for (Child child : children) {
-			idChildren.add(child.getIdchild());
-		}
-		Integer[] ids = (Integer[])idChildren.toArray();
-		dto.setIdchildren(ids);
+//		dto.setTotal(donate.getTotal());
+		//List<Child> children =  donate.getChildren();
+		//List<Integer> idChildren = new ArrayList<>();
+//		for (Child child : children) {
+//			idChildren.add(child.getIdchild());
+//	//	}
+	//	Integer[] ids = (Integer[])idChildren.toArray();
+		//dto.setIdchildren(ids);
 		return dto;
 	}
 	
@@ -67,13 +68,14 @@ public class AppModelMapper {
 			return null;
 		}
 		Child c = new Child();
-		c.setAdress(dto.getAdress());
+	    c.setAdress(dto.getAdress());
 		c.setDatenaissance(dto.getDatenaissance());
-		c.setFirstname(dto.getFirstname());
+	    c.setFirstname(dto.getFirstname());
+	    c.setLastname(dto.getLastname());
 		c.setImageUrl(dto.getImageUrl());
-		c.setOld(dto.getOld());
-		c.setSexe(dto.getSexe());
-		c.setVille(dto.getVille());
+	    c.setOld(dto.getOld());
+	    c.setSexe(dto.getSexe());
+	    c.setVille(dto.getVille());
 		c.setDescription(dto.getDescription());
 		return c;
 	}
@@ -83,14 +85,42 @@ public class AppModelMapper {
 			return null;
 		}
 		ChildDto dto = new ChildDto();
-		dto.setAdress(ch.getAdress());
+	    dto.setAdress(ch.getAdress());
 		dto.setDatenaissance(ch.getDatenaissance());
 		dto.setFirstname(ch.getFirstname());
+		dto.setLastname(ch.getLastname());
 		dto.setImageUrl(ch.getImageUrl());
 		dto.setOld(ch.getOld());
 		dto.setSexe(ch.getSexe());
-		dto.setVille(ch.getVille());
+	    dto.setVille(ch.getVille());
 		dto.setDescription(ch.getDescription());
+		return dto;
+	}
+	public static Childdonator mapChilddonator(ChilddonatorDto dto) {
+		if(dto == null) {
+			return null;
+		}
+		Childdonator cd = new Childdonator();
+	    
+	    Child child = new Child();
+	    child.setIdchild(dto.getIdchild());
+	    
+	    Donate donate = new Donate();
+	    donate.setIddonate(dto.getIddonate());
+	    
+	  //  cd.setDonate(donate);
+	    cd.setChild(child);
+	    cd.setTotal(dto.getTotal());
+		return cd;
+	}
+	public static ChilddonatorDto MapChilddonatorDto(Childdonator cd) {
+		if(cd == null) {
+			return null;
+		}
+		ChilddonatorDto dto = new ChilddonatorDto();
+		dto.setTotal(cd.getTotal());
+	  //  dto.setIddonate(cd.getDonate().getIddonate());
+	 //   dto.setIdchild(cd.getChild().getIdchild());
 		return dto;
 	}
 	

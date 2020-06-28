@@ -5,19 +5,15 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dtos.AppResultDto;
 import com.example.demo.dtos.DonateDto;
-import com.example.demo.entity.Child;
 import com.example.demo.entity.Donate;
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.repository.ChildRepository;
 import com.example.demo.repository.DonateRepository;
 import com.example.demo.service.DonateService;
 
@@ -65,8 +61,14 @@ public class DonateController {
 	  /*************************** create of donate *************************************/
 	  
 		 @RequestMapping(value = "/donation", method = RequestMethod.POST)
-		    public DonateDto createDonate(@Valid @RequestBody DonateDto donateDto) {
-			 return donateService.saveDonate(donateDto);
-			 
+		    public AppResultDto createDonate(@Valid @RequestBody DonateDto donateDto) {
+			 donateService.saveDonate(donateDto);
+			 return new AppResultDto();
 		    }
+		 @RequestMapping(value = "/donator", method = RequestMethod.POST)
+		    public Donate createChild(@Valid @RequestBody Donate donate) {
+		        return donateRepoo.save(donate);
+		    }
+	
+		    
 }

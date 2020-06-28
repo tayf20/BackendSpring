@@ -3,23 +3,23 @@ package com.example.demo.dtos;
 public class ChildDto {
 
 	private String firstname;
-	
+
 	private String lastname;
-	
+
 	private int old;
-	
+
 	private String sexe;
-	
+
 	private String datenaissance;
-	
+
 	private String ville;
-	
+
 	private String adress;
-	
+
 	private String ImageUrl;
-	
+
 	private String description;
- 
+
 	public String getDescription() {
 		return description;
 	}
@@ -39,8 +39,6 @@ public class ChildDto {
 	public ChildDto() {
 		super();
 	}
-
-	
 
 	public ChildDto(String firstname, String lastname, int old, String sexe, String datenaissance, String ville,
 			String adress, String imageUrl) {
@@ -110,6 +108,5 @@ public class ChildDto {
 	public void setAdress(String adress) {
 		this.adress = adress;
 	}
-	
-	
+
 }

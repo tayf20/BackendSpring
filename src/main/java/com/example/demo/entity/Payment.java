@@ -24,7 +24,9 @@ public class Payment  implements Serializable{
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "iddonate", nullable = false)
     private Donate donate;
-	
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "idchild", nullable = false)
+    private Child child;
 	public Integer getIdpayment() {
 		return idpayment;
 	}
